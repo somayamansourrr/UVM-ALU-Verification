@@ -1,7 +1,7 @@
 import uvm_pkg::*;
-//import my_pkg::*;
 `include "environment.sv";
 `include "Sequence.sv";
+//`include "package.sv"
 
 class base_test extends uvm_test;
   environment env_o;

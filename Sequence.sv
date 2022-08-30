@@ -1,6 +1,6 @@
 import uvm_pkg::*;
-`include "uvm_macros.svh"
-//`include "item.sv"
+`include "uvm_macros.svh" 
+
 
 class Sequence extends uvm_sequence#(item);
 	item req;

@@ -1,6 +1,5 @@
-import uvm_pkg::*;
-//import my_pkg::*;
-//`include "item.sv"
+import uvm_pkg::*; 
+
 
 class driver extends uvm_driver#(item);
   virtual add_if vif;

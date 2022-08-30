@@ -1,9 +1,8 @@
 import uvm_pkg::*;
-//import my_pkg::*;
 `include "Sequencer.sv"
 `include "driver.sv"
-`include "monitor.sv"
-//`include "item.sv"
+`include "monitor.sv" 
+
 
 class agent extends uvm_agent;
   `uvm_component_utils(agent)

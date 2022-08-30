@@ -1,11 +1,11 @@
 import uvm_pkg::*;
-//import my_pkg::*;
 `include "uvm_macros.svh"
-`include "item.sv"
+`include "item.sv" 
+
 class Sequencer extends uvm_sequencer#(item);
 	`uvm_component_utils(Sequencer)
 
-	function new(string name="Sequence",uvm_component parent=null);
+	function new(string name="Sequencer",uvm_component parent=null);
 		super.new(name,parent);
 	endfunction
 
