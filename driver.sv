@@ -1,4 +1,6 @@
-import uvm_pkg::*; 
+import uvm_pkg::*;
+import my_pkg::*; 
+`include "uvm_macros.svh" 
 
 
 class driver extends uvm_driver#(item);
@@ -22,7 +24,7 @@ class driver extends uvm_driver#(item);
       `uvm_info(get_type_name, $sformatf("A = %0d, B = %0d, ALU_Sel=%0d", req.A, req.B, req.ALU_Sel), UVM_LOW);
       vif.A <= req.A;
       vif.B <= req.B;
-      vif.ALU_Sel <= req.ALU_Sel;
+      //vif.ALU_Sel <= req.ALU_Sel;
       seq_item_port.item_done();
     end
   endtask

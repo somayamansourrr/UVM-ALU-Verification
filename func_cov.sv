@@ -1,18 +1,22 @@
 import uvm_pkg::*;
+import my_pkg::*;
 `include "uvm_macros.svh"
-`include "add_if.sv"
 
-class func_cov extends uvm_component;
+class func_cov extends uvm_subscriber #(item);
 	`uvm_component_utils(func_cov)
-	//item m_item;
-	uvm_event passed;
-	virtual add_if vif;
+	item m_item;
+	event passed;
 
-	covergroup cg @(passed);
-		Instructions: coverpoint vif.ALU_Sel { option.weight=16;
-								   bins all []= {[0:$]};
- 			
-                                    }
+	covergroup cg;
+		Instructions: coverpoint m_item.ALU_Sel{ 
+									option.weight=16;
+									bins all []= {[0:$]};
+ 								   }
+     		Transitioning: coverpoint m_item.ALU_Sel{ 
+									option.weight=1;
+									bins transition = (4'b0010 => 4'b1000 => 4'b1101); 
+								    }
+                                   
 	endgroup
 
 	function new(string name="func_cov", uvm_component parent=null);
@@ -20,19 +24,25 @@ class func_cov extends uvm_component;
 		cg=new();
 	endfunction
 
-	
-	/*function void write (item t);
-		m_item=t;
-		passed.wait_trigger;
-		cg.sample();
-		$display("Coverage=%0.2f %%", cg.get_coverage());
-	endfunction */
+	function void build_phase(uvm_phase phase);
+		if(!uvm_config_db#(event)::get(this, "", "passed", passed))
+        `uvm_fatal("NO_EVENT",{"uvm event must be set for: ",get_full_name(),".passed_event"});
 
+	endfunction
+
+	function void write (item t);
+		m_item=t;
+	endfunction 
+	
 	task run_phase(uvm_phase phase);
-    		forever begin
-      		@(passed);
-      		cg.sample();
-			$display("Coverage=%0.2f %%", cg.get_coverage());
-    		end
-  	endtask
+		forever begin
+			@(passed);
+				cg.sample();
+		end
+	endtask
+
+	function void report_phase (uvm_phase phase);
+		`uvm_info(get_type_name, $sformatf("Coverage=%0.2f %%", cg.get_coverage()), UVM_LOW);
+	endfunction
+
 endclass

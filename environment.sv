@@ -1,8 +1,9 @@
 import uvm_pkg::*;
+import my_pkg::*;
 `include "uvm_macros.svh"
-`include "agent.sv";
-`include "scoreboard.sv";
-`include "func_cov.sv";
+typedef class agent;
+typedef class scoreboard;
+typedef class func_cov;
 
 
 class environment extends uvm_env;
@@ -10,6 +11,8 @@ class environment extends uvm_env;
   agent agt;
   scoreboard sb;
   func_cov fc;
+
+  event passed;
  
   function new(string name = "environment", uvm_component parent = null);
     super.new(name, parent);
@@ -20,6 +23,7 @@ class environment extends uvm_env;
     agt = agent::type_id::create("agt", this);
     sb = scoreboard::type_id::create("sb", this);
     fc = func_cov::type_id::create("fc", this);
+    uvm_config_db#(event)::set(null, "*", "passed", passed);
   endfunction
   
   function void connect_phase(uvm_phase phase);

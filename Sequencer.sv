@@ -1,7 +1,10 @@
 import uvm_pkg::*;
+import my_pkg::*;
 `include "uvm_macros.svh"
-`include "item.sv" 
 
+typedef class item;
+
+// This class is not necessary, could just use uvm_sequencer directly
 class Sequencer extends uvm_sequencer#(item);
 	`uvm_component_utils(Sequencer)
 

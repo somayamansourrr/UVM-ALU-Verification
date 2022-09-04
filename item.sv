@@ -1,4 +1,5 @@
 import uvm_pkg::*;
+import my_pkg::*;
 `include "uvm_macros.svh" 
 
 class item extends uvm_sequence_item;

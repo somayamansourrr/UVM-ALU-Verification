@@ -1,7 +1,7 @@
 import uvm_pkg::*;
-`include "base_test.sv";
+import my_pkg::*;
 `include "uvm_macros.svh"
-`include "add_if.sv"
+
 
 module tb_top;
   bit clk;
@@ -9,14 +9,12 @@ module tb_top;
   always #2 clk = ~clk;
   
   initial begin
-    //clk = 0;
     reset = 1;
     #5; 
     reset = 0;
   end
 
   add_if vif(clk,reset);
- // clk_if cif();	
   
   alu DUT(  .clk(vif.clk),
 		.reset(vif.reset),
@@ -29,9 +27,8 @@ module tb_top;
   initial begin
     // set interface in config_db
     uvm_config_db#(virtual add_if)::set(uvm_root::get(), "*", "vif", vif);
- //   uvm_config_db#(virtual clk_if)::set(uvm_root::get(), "*", "cif", cif);
   end
   initial begin
-    run_test("base_test");
+    run_test();
   end
 endmodule
