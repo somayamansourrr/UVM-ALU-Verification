@@ -17,9 +17,7 @@ class item extends uvm_sequence_item;
 	`uvm_object_utils_begin(item)
 		`uvm_field_int(A,UVM_ALL_ON)
 		`uvm_field_int(B,UVM_ALL_ON)
-		`uvm_field_int(ALU_Sel,UVM_ALL_ON) //
+		`uvm_field_int(ALU_Sel,UVM_ALL_ON) 
 	`uvm_object_utils_end
-
-//constraints
 
 endclass

@@ -4,7 +4,7 @@ import my_pkg::*;
 
 typedef class item;
 
-// This class is not necessary, could just use uvm_sequencer directly
+// This class is not necessary, could just use uvm_sequencer class directly
 class Sequencer extends uvm_sequencer#(item);
 	`uvm_component_utils(Sequencer)
 

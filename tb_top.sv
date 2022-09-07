@@ -25,10 +25,12 @@ module tb_top;
 		.CarryOut(vif.CarryOut));
   
   initial begin
-    // set interface in config_db
     uvm_config_db#(virtual add_if)::set(uvm_root::get(), "*", "vif", vif);
   end
+
   initial begin
+    // Use the following command argument: vsim -c -do "run -all" tb_top +UVM_TESTNAME=testcase_1 
     run_test();
   end
+
 endmodule

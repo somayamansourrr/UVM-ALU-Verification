@@ -126,7 +126,7 @@ class scoreboard extends uvm_scoreboard;
      			end
 		4'b0110: // Rotate Left
 			begin
-			output_1= sb_item.A[6:0] && sb_item.A[7];
+			output_1= {sb_item.A[6:0] , sb_item.A[7]};
         		$display("----------------------------------------------------------------------------------------------------------");
         		if(output_1 == sb_item.ALU_Out) begin
           			`uvm_info(get_type_name, $sformatf("Rotate Left Matched: A = %0d, B = %0d, ALU_Out = %0d", sb_item.A, sb_item.B, sb_item.ALU_Out),UVM_LOW);
@@ -141,14 +141,14 @@ class scoreboard extends uvm_scoreboard;
      			end
 		4'b0111: // Rotate Right
 			begin
-			output_1= sb_item.A[0] && sb_item.A[7:1];
+			output_1= {sb_item.A[0] , sb_item.A[7:1]};
         		$display("----------------------------------------------------------------------------------------------------------");
         		if(output_1 == sb_item.ALU_Out) begin
-          			`uvm_info(get_type_name, $sformatf("Rotate Right Matched: A = %0d, B = %0d, ALU_Out = %0d", sb_item.A, sb_item.B, sb_item.ALU_Out),UVM_LOW);
+          			`uvm_info(get_type_name, $sformatf("Rotate Right Matched: A = %0d, B = %0d, ALU_Out = %0d, output_1=%0d", sb_item.A, sb_item.B, sb_item.ALU_Out,output_1),UVM_LOW);
           			->passed;
 			end
        			else begin
-         			 `uvm_error(get_name, $sformatf("Rotate Right NOT matched: A = %0d, B = %0d, ALU_Out = %0d", sb_item.A, sb_item.B, sb_item.ALU_Out));
+         			 `uvm_error(get_name, $sformatf("Rotate Right NOT matched: A = %0d, B = %0d, ALU_Out = %0d, output_1=%0d", sb_item.A, sb_item.B, sb_item.ALU_Out,output_1));
 	
 
         		end

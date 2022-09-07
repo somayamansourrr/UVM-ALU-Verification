@@ -23,7 +23,7 @@ class base_test extends uvm_test;
   task run_phase(uvm_phase phase);
     phase.raise_objection(this);
     bseq = Sequence::type_id::create("bseq");
-    repeat(10) begin 
+    repeat(4) begin 
       #5; bseq.start(env_o.agt.seqr);
     end
     
